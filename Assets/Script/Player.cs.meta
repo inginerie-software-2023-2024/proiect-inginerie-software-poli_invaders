@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 343a80d851d2b96428d85b7c7b39f691
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - playerSr: {instanceID: 0}
+  - playerMov: {instanceID: 0}
+  - defaultSprite: {instanceID: 0}
+  - hurtSprite: {instanceID: 0}
+  - pinkSprite: {instanceID: 0}
+  - purpleSprite: {instanceID: 0}
+  - orangeSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
