@@ -152,3 +152,5 @@ THEN the game will display a button that the user can press to create one.
 # Backlog
 
 Trello link: https://trello.com/b/FBbVJ1XR/poliinvaders
+
+![Trello](Trello.png)
