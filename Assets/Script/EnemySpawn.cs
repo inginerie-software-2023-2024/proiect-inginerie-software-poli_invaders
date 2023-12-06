@@ -9,6 +9,8 @@ public class EnemySpawn : MonoBehaviour
     public float speedUpdateInterval = 5f;
     public float speedIncreaseAmount = 2f;
 
+    [SerializeField] public delegate void NewEnemy();
+
     private void Start()
     {
         StartCoroutine(InstantiateEnemyCoroutine());
