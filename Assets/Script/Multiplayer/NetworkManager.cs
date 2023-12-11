@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public enum ClientToServerId : ushort
 {
     isReady = 1,
     playerData = 2,
+    playerAction = 3,
+    updateRestartCount = 4,
 }
 
 public enum ServerToClientId : ushort
@@ -18,6 +19,9 @@ public enum ServerToClientId : ushort
     playerJoined = 2,
     startGame = 3,
     playerData = 4,
+    playerAction = 5,
+    gameOver = 6,
+    updateRestartCount = 7,
 }
 
 public class NetworkManager : MonoBehaviour
@@ -47,7 +51,7 @@ public class NetworkManager : MonoBehaviour
     [SerializeField] private ushort port;
 
     private static ushort? session;
-    private static Dictionary<ushort, GameObject> players;
+    private static Dictionary<ushort, Multi_Player> players;
 
     private static ushort mainPlayerId;
     private static ushort secPlayerId;
@@ -102,12 +106,13 @@ public class NetworkManager : MonoBehaviour
 
     private void PlayerLeft(object sender, ClientDisconnectedEventArgs e)
     {
-
+        Client.Disconnect();
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     private void DidDisconnect(object sender, EventArgs e)
     {
-
+        Destroy(gameObject);
     }
 
     [MessageHandler((ushort)(ServerToClientId.session))]
@@ -150,15 +155,15 @@ public class NetworkManager : MonoBehaviour
 
         foreach (GameObject gameObject in gameObjects)
         {
-            if (gameObject.TryGetComponent<Multi_Movement>(out var movement))
+            if (gameObject.TryGetComponent<Multi_Player>(out var player))
             {
-                if (movement.IsMain())
+                if (player.IsMain)
                 {
-                    players[mainPlayerId] = gameObject;
+                    players[mainPlayerId] = player;
                 }
                 else
                 {
-                    players[secPlayerId] = gameObject;
+                    players[secPlayerId] = player;
                 }
             }
         }
@@ -167,12 +172,35 @@ public class NetworkManager : MonoBehaviour
     [MessageHandler((ushort)(ServerToClientId.playerData))]
     private static void UpdateData(Message message)
     {
-        ushort id = message.GetUShort();
+        ushort playerId = message.GetUShort();
         Vector3 position = message.GetVector3();
 
-        if (players[id] != null)
+        if (players[playerId] != null)
         {
-            players[id].GetComponent<Multi_Movement>().UpdatePosition(position);
+            players[playerId].PlayerMovement.UpdatePosition(position);
         }
+    }
+
+    [MessageHandler((ushort)ServerToClientId.playerAction)]
+    private static void PlayerAction(Message message)
+    {
+        ushort playerId = message.GetUShort();
+        ushort action = message.GetUShort();
+
+        if (players[playerId] != null)
+        {
+            players[playerId].HandleAction(action);
+
+            if (action == (ushort)PlayerActions.died)
+            {
+                players[playerId] = null;
+            }
+        }
+    }
+
+    [MessageHandler((ushort)ServerToClientId.gameOver)]
+    private static void GameOver(Message message)
+    {
+        SceneManager.LoadScene("MultiGameOver");
     }
 }

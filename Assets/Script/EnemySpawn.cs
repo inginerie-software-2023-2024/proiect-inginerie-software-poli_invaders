@@ -9,8 +9,6 @@ public class EnemySpawn : MonoBehaviour
     public float speedUpdateInterval = 5f;
     public float speedIncreaseAmount = 2f;
 
-    [SerializeField] public delegate void NewEnemy();
-
     private void Start()
     {
         StartCoroutine(InstantiateEnemyCoroutine());
@@ -40,10 +38,10 @@ public class EnemySpawn : MonoBehaviour
     // Instantiate an enemy at a random position on the y-axis with a speed and direction
     void InstantiateEnemy()
     {
-        if (Player.instance.health == 0)
+        /*if (Player.instance.health == 0)
         {
             return;
-        }
+        }*/
 
         Vector3 randomPosition = new Vector3(this.transform.position.x, Random.Range(-9f, 6.5f), 0);
         GameObject enemyObj = Instantiate(enemyRB, randomPosition, Quaternion.identity);
