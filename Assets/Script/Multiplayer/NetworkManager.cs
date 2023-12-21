@@ -10,7 +10,8 @@ public enum ClientToServerId : ushort
     isReady = 1,
     playerData = 2,
     playerAction = 3,
-    updateRestartCount = 4,
+    enemyHurt = 4,
+    updateRestartCount = 5,
 }
 
 public enum ServerToClientId : ushort
@@ -20,8 +21,11 @@ public enum ServerToClientId : ushort
     startGame = 3,
     playerData = 4,
     playerAction = 5,
-    gameOver = 6,
-    updateRestartCount = 7,
+    newEnemy = 6,
+    updateEnemySpeed = 7,
+    enemyDeath = 8,
+    gameOver = 9,
+    updateRestartCount = 10,
 }
 
 public class NetworkManager : MonoBehaviour

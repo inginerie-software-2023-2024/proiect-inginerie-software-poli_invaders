@@ -4,7 +4,8 @@ using UnityEngine;
 public enum PlayerActions : ushort
 {
     gotHit = 1,
-    died = 2,
+    shot = 2,
+    died = 3,
 }
 
 public class Multi_Player : MonoBehaviour
@@ -18,6 +19,7 @@ public class Multi_Player : MonoBehaviour
     public bool IsMain { get { return Is_Main; } }
 
     private SpriteRenderer playerSR;
+    private MultiPlayerPowerUps playerPowerUps;
     public Multi_Movement PlayerMovement { get; private set; }
 
     [Header("Sprites")]
@@ -29,10 +31,11 @@ public class Multi_Player : MonoBehaviour
 
     private void Start()
     {
-        playerSR = gameObject.GetComponent<SpriteRenderer>();
-        PlayerMovement = gameObject.GetComponent<Multi_Movement>();
+        playerSR = GetComponent<SpriteRenderer>();
+        playerPowerUps = GetComponent<MultiPlayerPowerUps>();
+        PlayerMovement = GetComponent<Multi_Movement>();
 
-        if (gameObject.TryGetComponent<Rigidbody2D>(out var rb))
+        if (TryGetComponent<Rigidbody2D>(out var rb))
         {
             rb.gravityScale = 0.0f;
         }
@@ -40,7 +43,7 @@ public class Multi_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsMain && collision.GetComponent<Enemy>() != null)
+        if (IsMain && collision.GetComponent<MultiEnemy>() != null)
         {
             SendAction(PlayerActions.gotHit);
         }
@@ -93,7 +96,7 @@ public class Multi_Player : MonoBehaviour
         }
     }
 
-    private void SendAction(PlayerActions action)
+    public void SendAction(PlayerActions action)
     {
         Message playerAction = Message.Create(MessageSendMode.Reliable, ClientToServerId.playerAction);
         playerAction.AddUShort((ushort)action);
@@ -108,6 +111,11 @@ public class Multi_Player : MonoBehaviour
             case (ushort)PlayerActions.gotHit:
                 {
                     GetHit();
+                    break;
+                }
+            case (ushort)PlayerActions.shot:
+                {
+                    playerPowerUps.Shoot();
                     break;
                 }
             case (ushort)PlayerActions.died:
