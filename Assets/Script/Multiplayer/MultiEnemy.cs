@@ -2,7 +2,7 @@ using Riptide;
 using System;
 using UnityEngine;
 
-public enum PowerUp : ushort
+public enum PowerUpType : ushort
 {
     none = 0,
     doubleFire = 1,
@@ -37,32 +37,6 @@ public class MultiEnemy : MonoBehaviour
     public void SetDirection(Vector3 direction)
     {
         this.direction = direction;
-    }
-
-    public void SpawnPowerUp(ushort type)
-    {
-        switch ((PowerUp)type)
-        {
-            case PowerUp.none:
-                {
-                    break;
-                }
-            case PowerUp.doubleFire:
-                {
-                    Instantiate(_doubleFirePU, transform.position, Quaternion.identity);
-                    break;
-                }
-            case PowerUp.shield:
-                {
-                    Instantiate(_shieldPU, transform.position, Quaternion.identity);
-                    break;
-                }
-            default:
-                {
-                    Debug.Log("(ENEMY): Wrong PowerUp value.");
-                    break;
-                }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)

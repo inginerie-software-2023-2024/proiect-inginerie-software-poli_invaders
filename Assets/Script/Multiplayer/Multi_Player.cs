@@ -1,11 +1,13 @@
 using Riptide;
+using System;
 using UnityEngine;
 
 public enum PlayerActions : ushort
 {
     gotHit = 1,
     shot = 2,
-    died = 3,
+    gotPowerUp = 3,
+    died = 4,
 }
 
 public class Multi_Player : MonoBehaviour
@@ -104,7 +106,7 @@ public class Multi_Player : MonoBehaviour
         NetworkManager.Singleton.Client.Send(playerAction);
     }
 
-    public void HandleAction(ushort action)
+    public void HandleAction(ushort action, Message message)
     {
         switch (action)
         {
@@ -116,6 +118,15 @@ public class Multi_Player : MonoBehaviour
             case (ushort)PlayerActions.shot:
                 {
                     playerPowerUps.Shoot();
+                    break;
+                }
+            case (ushort)PlayerActions.gotPowerUp:
+                {
+                    Guid powerUpGuid = new(message.GetString());
+
+                    MultiPowerUpManager.Singleton.ActivatePowerUp(powerUpGuid, playerPowerUps);
+                    MultiPowerUpManager.Singleton.RemovePowerUp(powerUpGuid);
+
                     break;
                 }
             case (ushort)PlayerActions.died:

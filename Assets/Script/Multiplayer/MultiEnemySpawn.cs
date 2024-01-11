@@ -81,7 +81,11 @@ public class MultiEnemySpawn : MonoBehaviour
         Guid guid = new(message.GetString());
         MultiEnemy enemy = Singleton.enemyList[guid];
 
-        enemy.SpawnPowerUp(message.GetUShort());
+        ushort powerUpType = message.GetUShort();
+        if ((PowerUpType)powerUpType != PowerUpType.none) {
+            MultiPowerUpManager.Singleton.SpawnNewPowerUp(new(message.GetString()), powerUpType, enemy.transform.position);
+        }
+
         Destroy(enemy.gameObject);
         Singleton.enemyList.Remove(guid);
     }

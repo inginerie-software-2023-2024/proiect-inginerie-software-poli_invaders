@@ -1,4 +1,5 @@
 using Riptide;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class MultiPlayerPowerUps : MonoBehaviour
     private bool shieldActive;
     private SpriteRenderer playerSprite;
     private Multi_Player player;
+
+    private float doubleFireTime;
+    private float shieldTime;
 
     [SerializeField] private MultiProjectile laserPrefab;
     [SerializeField] private Sprite shieldSprite;
@@ -33,6 +37,26 @@ public class MultiPlayerPowerUps : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (doubleFire)
+        {
+            doubleFireTime -= Time.deltaTime;
+
+            if (doubleFireTime <= 0.0f)
+            {
+                DeactivateDoubleFirePowerUp();
+            }
+        }
+
+        if (shieldActive)
+        {
+            shieldTime -= Time.deltaTime;
+
+            if (shieldTime <= 0.0f)
+            {
+                DeactivateShieldPowerUp();
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (player.IsMain)
@@ -40,6 +64,50 @@ public class MultiPlayerPowerUps : MonoBehaviour
                 player.SendAction(PlayerActions.shot);
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (player.IsMain && other.gameObject.TryGetComponent(out MultiPowerUp powerUp))
+        {
+            Message gotPowerUp = Message.Create(MessageSendMode.Reliable, (ushort)ClientToServerId.playerAction);
+            gotPowerUp.AddUShort((ushort)PlayerActions.gotPowerUp);
+            gotPowerUp.AddString(powerUp.guid.ToString());
+
+            NetworkManager.Singleton.Client.Send(gotPowerUp);
+        }
+    }
+
+    public void ActivateDoubleFirePowerUp()
+    {
+        doubleFire = true;
+        doubleFireTime = doubleFireDuration;
+    }
+
+    public void DeactivateDoubleFirePowerUp()
+    {
+        doubleFire = false;
+    }
+
+    public void ActivateShieldPowerUp()
+    {
+        if (!shieldActive)
+        {
+            shieldActive = true;
+            playerSprite.sprite = shieldSprite;
+
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        }
+
+        shieldTime = shieldDuration;
+    }
+
+    public void DeactivateShieldPowerUp()
+    {
+        shieldActive = false;
+        playerSprite.sprite = defaultSprite;
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
     }
 
     public void Shoot()

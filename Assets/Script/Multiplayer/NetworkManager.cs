@@ -193,7 +193,7 @@ public class NetworkManager : MonoBehaviour
 
         if (players[playerId] != null)
         {
-            players[playerId].HandleAction(action);
+            players[playerId].HandleAction(action, message);
 
             if (action == (ushort)PlayerActions.died)
             {
