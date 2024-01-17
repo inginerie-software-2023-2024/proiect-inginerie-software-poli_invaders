@@ -7,25 +7,28 @@ using UnityEngine.SceneManagement;
 
 public enum ClientToServerId : ushort
 {
-    isReady = 1,
-    playerData = 2,
-    playerAction = 3,
-    enemyHurt = 4,
-    updateRestartCount = 5,
+    joinSession = 1,
+    isReady = 2,
+    playerData = 3,
+    playerAction = 4,
+    enemyHurt = 5,
+    updateRestartCount = 6,
 }
 
 public enum ServerToClientId : ushort
 {
     session = 1,
-    playerJoined = 2,
-    startGame = 3,
-    playerData = 4,
-    playerAction = 5,
-    newEnemy = 6,
-    updateEnemySpeed = 7,
-    enemyDeath = 8,
-    gameOver = 9,
-    updateRestartCount = 10,
+    wrongCode = 2,
+    playerJoined = 3,
+    startGame = 4,
+    playerData = 5,
+    playerAction = 6,
+    newEnemy = 7,
+    updateEnemySpeed = 8,
+    enemyDeath = 9,
+    gameOver = 10,
+    updateRestartCount = 11,
+    endSession = 12,
 }
 
 public class NetworkManager : MonoBehaviour
@@ -54,7 +57,7 @@ public class NetworkManager : MonoBehaviour
     [SerializeField] private string ip;
     [SerializeField] private ushort port;
 
-    private static ushort? session;
+    private static Guid? session;
     private static Dictionary<ushort, Multi_Player> players;
 
     private static ushort mainPlayerId;
@@ -110,8 +113,7 @@ public class NetworkManager : MonoBehaviour
 
     private void PlayerLeft(object sender, ClientDisconnectedEventArgs e)
     {
-        Client.Disconnect();
-        SceneManager.LoadScene("MainMenuScene");
+
     }
 
     private void DidDisconnect(object sender, EventArgs e)
@@ -122,7 +124,14 @@ public class NetworkManager : MonoBehaviour
     [MessageHandler((ushort)(ServerToClientId.session))]
     private static void JoinSession(Message message)
     {
-        session = message.GetUShort();
+        session = new(message.GetString());
+
+        if (MultiJoinLobby.Singleton.startPrivate)
+        {
+            MultiJoinLobby.Singleton.startPrivate = false;
+
+            MultiJoinLobby.Singleton.GetPrivateCodeText().text = session.ToString();
+        }
     }
 
     [MessageHandler((ushort)(ServerToClientId.playerJoined))]
@@ -134,12 +143,12 @@ public class NetworkManager : MonoBehaviour
         players.Add(secPlayerId, null);
 
         Message playerReady = Message.Create(MessageSendMode.Reliable, (ushort)(ClientToServerId.isReady));
-        playerReady.AddUShort(session.Value);
+        playerReady.AddString(session.Value.ToString());
         Singleton.Client.Send(playerReady);
     }
 
     [MessageHandler((ushort)(ServerToClientId.startGame))]
-    private static void StartGame(Message message)
+    private static void StartGame(Message _)
     {
         while (session == null) ;
 
@@ -203,8 +212,15 @@ public class NetworkManager : MonoBehaviour
     }
 
     [MessageHandler((ushort)ServerToClientId.gameOver)]
-    private static void GameOver(Message message)
+    private static void GameOver(Message _)
     {
         SceneManager.LoadScene("MultiGameOver");
+    }
+
+    [MessageHandler((ushort)ServerToClientId.endSession)]
+    private static void EndSession(Message _)
+    {
+        Singleton.Client.Disconnect();
+        SceneManager.LoadScene("MainMenuScene");
     }
 }

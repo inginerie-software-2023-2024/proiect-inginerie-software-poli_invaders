@@ -96,7 +96,10 @@ public class MultiPlayerPowerUps : MonoBehaviour
             shieldActive = true;
             playerSprite.sprite = shieldSprite;
 
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+            if (player.IsMain)
+            {
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+            }
         }
 
         shieldTime = shieldDuration;
@@ -107,7 +110,10 @@ public class MultiPlayerPowerUps : MonoBehaviour
         shieldActive = false;
         playerSprite.sprite = defaultSprite;
 
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        if (player.IsMain)
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        }
     }
 
     public void Shoot()
