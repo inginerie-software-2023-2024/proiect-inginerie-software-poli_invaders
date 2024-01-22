@@ -126,7 +126,7 @@ public class NetworkManager : MonoBehaviour
     {
         session = new(message.GetString());
 
-        if (MultiJoinLobby.Singleton.startPrivate)
+        if (MultiJoinLobby.Singleton && MultiJoinLobby.Singleton.startPrivate)
         {
             MultiJoinLobby.Singleton.startPrivate = false;
 
@@ -222,5 +222,15 @@ public class NetworkManager : MonoBehaviour
     {
         Singleton.Client.Disconnect();
         SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public bool isDisconnected()
+    {
+        return Client.IsConnected;
+    }
+
+    public bool isInSession()
+    {
+        return session.HasValue;
     }
 }

@@ -91,6 +91,12 @@ public class MultiEnemySpawn : MonoBehaviour
 
             Destroy(enemy.gameObject);
             Singleton.enemyList.Remove(guid);
+            Score.Instance.AddScore(1);
         }
+    }
+
+    public int EnemyCount()
+    {
+        return enemyList.Count;
     }
 }
