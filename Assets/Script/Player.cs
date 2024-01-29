@@ -23,25 +23,32 @@ public class Player : MonoBehaviour
     public Sprite purpleSprite;
     public Sprite orangeSprite;
 
-    private void Awake() {
+    public static string filePath;
+    
+    private void Awake()
+    {
         instance = this;
     }
 
-    private void Start() {
+    private void Start()
+    {
         health = 5f;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D hitInfo) {
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
         Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null) {
+        if (enemy != null)
+        {
             health -= 1;
             if (health <= 0) {
                 
                 //MOARE PLAYERU :((
                 //Destroy(gameObject);
                 //adaug aici scorul
+<<<<<<< Updated upstream
                 
                 Debug.Log("Ba hai ca scrie in csv" + Score.Instance.CurrentScore);
                 WriteScoreToCSV(Score.Instance.CurrentScore);
@@ -49,6 +56,16 @@ public class Player : MonoBehaviour
                 
                 
                 if (projectileScript != null) {
+=======
+
+                Debug.Log("Ba hai ca scrie in csv" + Score.Instance.CurrentScore);
+                WriteScoreToCSV(Score.Instance.CurrentScore);
+
+
+
+                if (projectileScript != null)
+                {
+>>>>>>> Stashed changes
                     projectileScript.enabled = false;
                 }
 
@@ -67,6 +84,10 @@ public class Player : MonoBehaviour
 
         }
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
     // Added small easter egg for fun :)
     private void Update()
@@ -75,39 +96,39 @@ public class Player : MonoBehaviour
         {
             playerSr.sprite = pinkSprite;
         }
-        
+
         if (Input.GetKey(KeyCode.M))
         {
             playerSr.sprite = orangeSprite;
         }
-        
+
         if (Input.GetKey(KeyCode.B))
         {
             playerSr.sprite = purpleSprite;
         }
 
-        if (hurtTimer > 0) {
+        if (hurtTimer > 0)
+        {
             hurtTimer -= Time.deltaTime;
-            if (hurtTimer <= 0) {
+            if (hurtTimer <= 0)
+            {
                 playerSr.sprite = defaultSprite;
             }
         }
 
     }
-    
-    private void WriteScoreToCSV(int score)
-    {
-        string filePath = "D:\\PoliInva\\score.csv";
-        
-        Debug.Log("Intra in csv PALYERUYY cu scoru " + score + "!!");
-        
-        //filePath = "D:\\PoliInvaders-main\\scores.csv";
-        //string m_Path = Application.dataPath + "/HighscoreTable/score.csv";
-        //filePath = m_Path;
-        //Debug.Log("CSV File Path: " + m_Path);
 
+    public void WriteScoreToCSV(int score)
+    {
+
+        string assetsPath = Application.dataPath;
+        filePath = Path.Combine(Path.GetDirectoryName(assetsPath), "score.csv");
+
+        Debug.Log("CSV File Path: " + filePath);
         // Check if the CSV file exists
         bool fileExists = File.Exists(filePath);
+
+
 
         // Create or append to the CSV file
         using (StreamWriter sw = new StreamWriter(filePath, true))
@@ -115,13 +136,19 @@ public class Player : MonoBehaviour
             // If the file doesn't exist, write the header row
             if (!fileExists)
             {
-                sw.WriteLine("Score");
+                sw.WriteLine("12");
             }
+        }
 
-            // Write the score to a new row
+        using (StreamWriter sw = File.AppendText(filePath))
+        {
             sw.WriteLine(score.ToString());
         }
+
+
+
+        Debug.Log("Score written to CSV file successfully catre fiserul " + filePath);
+
+
     }
-
-
 }
