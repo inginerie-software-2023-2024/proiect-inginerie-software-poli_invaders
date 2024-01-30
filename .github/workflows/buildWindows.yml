@@ -22,7 +22,7 @@ jobs:
     - name: Set up Unity
       uses: game-ci/setup-unity@v1
       with:
-        unityVersion: 2020.3.19f1
+        unityVersion: 2023.3.18f1
         modules: 'all'
 
     - name: Build Unity project for Windows
