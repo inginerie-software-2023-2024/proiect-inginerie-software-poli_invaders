@@ -21,6 +21,32 @@ public class Enemy : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            // if enemy is dead, destroy it
+            Destroy(gameObject);
+
+            // Spawn powerups
+            if (rnd.Next(0, 100) > 90)
+            {
+                Instantiate(_doubleFirePU, this.transform.position, Quaternion.identity);
+            }
+            else if (rnd.Next(0, 100) < 10)
+            {
+                Instantiate(_shieldPU, this.transform.position, Quaternion.identity);
+            }
+
+            // Add score
+            if (Score.Instance != null)
+            {
+                Score.Instance.AddScore(1);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Projectile projectile = hitInfo.GetComponent<Projectile>();
