@@ -12,7 +12,7 @@ public class HighscoreTable : MonoBehaviour
     private Transform entryTemplate;
     private List<Transform> highscoreEntryTransformList;
     //private List<HighscoreEntry> highscoreEntryList;
-    
+    [SerializeField] Player jucator; //il am memorat pentru a mentine calea din fisier
     private void Start()
     {
         entryContainer = transform.Find("highscoreEntryContainer");
@@ -52,10 +52,6 @@ public class HighscoreTable : MonoBehaviour
         LoadScoresFromCSV("score.csv");
         
         
-        
-        
-        
-
         //Sort entry list by Score
         for(int i=0;i<highscores.highscoreEntryList.Count;i++)
         {
@@ -168,23 +164,25 @@ public class HighscoreTable : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void LoadScoresFromCSV(string filePath)
+    private void LoadScoresFromCSV(string fPath)
     {
         
-        Debug.Log("Intra in csv");
+        Debug.Log("Intra in csv" + Player.filePath);
 
-        filePath = "D:\\PoliInva\\score.csv";
+        fPath = Player.filePath;
+        Debug.Log("Path hai ma nu crapa: "+fPath);
+        //filePath = "D:\\PoliInva\\score.csv";
         //string m_Path = Application.dataPath ;
-        //filePath = m_Path;
-        //Debug.Log("CSV File Path: " + m_Path);
+        //fPath = m_Path+"\\score.csv";
+        Debug.Log("Hai ma ca n-a crapat Path: " + fPath);
         
-        if (!File.Exists(filePath))
+        if (!File.Exists(fPath))
         {
-            Debug.LogWarning("Score file not found: " + filePath);
+            Debug.LogWarning("Score file not found: " + fPath);
             return;
         }
 
-        string[] lines = File.ReadAllLines(filePath);
+        string[] lines = File.ReadAllLines(fPath);
         List<int> scores = new List<int>();
 
         for (int i = 0; i < lines.Length; i++)

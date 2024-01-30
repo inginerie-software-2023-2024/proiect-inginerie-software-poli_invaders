@@ -21,7 +21,7 @@ public class RetryGame : MonoBehaviour
     {
         Cursor.visible = false;
         //Score.Instance.ResetScore();
-        SceneManager.LoadScene("PoliInvaders");
+        SceneManager.LoadScene("SelectLevel");
     }
 
     public void LoadLobby()
