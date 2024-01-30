@@ -9,13 +9,13 @@ public class Melee : MonoBehaviour
     public Transform attackPoint;
     public SpriteRenderer playerSprite;
     public SpriteRenderer attackPointSprite;
-    public Sprite shieldSprite;
     public Sprite defaultSprite;
     public float doubleFireDuration = 10f; // Duration of the double fire power-up
     public float shieldDuration = 5f; // Duration of the shield power-up
     private Collider2D playerCollider; // Reference to the player's collider component
     private bool doubleFire = false;
     private bool shieldActive = false;
+    public Sprite shieldZprite;
     private Vector3 initialSize;
 
     private void Awake()
@@ -94,7 +94,7 @@ public class Melee : MonoBehaviour
 
     private void ActivateDoubleFirePowerUp()
     {
-        range = 3f;
+        range *=3f;
         attackPointSprite.transform.localScale *= 3;
         StartCoroutine(ResetDoubleFirePowerUpCoroutine());
     }
@@ -104,7 +104,7 @@ public class Melee : MonoBehaviour
         if (!shieldActive)
         {
             shieldActive = true;
-            playerSprite.sprite = shieldSprite; // Change the player sprite to the shield sprite
+            playerSprite.sprite = shieldZprite; // Change the player sprite to the shield sprite
 
             // Ignore collisions with enemies
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);

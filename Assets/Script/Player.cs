@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     
     private void Awake()
     {
+        Debug.Log("asdas");
         instance = this;
     }
 
@@ -109,8 +110,8 @@ public class Player : MonoBehaviour
     public void WriteScoreToCSV(int score)
     {
 
-        string assetsPath = Application.dataPath;
-        filePath = Path.Combine(Path.GetDirectoryName(assetsPath), "score.csv");
+        //string assetsPath = Application.dataPath;
+        //filePath = Path.Combine(Path.GetDirectoryName(assetsPath), "score.csv");
 
         Debug.Log("CSV File Path: " + filePath);
         // Check if the CSV file exists

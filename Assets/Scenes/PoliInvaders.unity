@@ -490,6 +490,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1220597592 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3572904163867981337, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+  m_PrefabInstance: {fileID: 8867640279382275773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1289991032
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +720,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546993054}
   m_CullTransparentMesh: 1
+--- !u!212 &1835622353 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1806436817341102212, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+  m_PrefabInstance: {fileID: 8867640279382275773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1917893602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,8 +1167,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1355233240004057700, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
       propertyPath: range
-      value: 1
+      value: 1.06
       objectReference: {fileID: 0}
+    - target: {fileID: 1355233240004057700, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+      propertyPath: damage
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355233240004057700, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 1220597592}
+    - target: {fileID: 1355233240004057700, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+      propertyPath: shieldZprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 79c29538106551146a9a03962e2fa6cc, type: 3}
+    - target: {fileID: 1355233240004057700, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+      propertyPath: defaultSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f454a435d17d37347ab5f4cd102703b6, type: 3}
+    - target: {fileID: 1355233240004057700, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+      propertyPath: attackPointSprite
+      value: 
+      objectReference: {fileID: 1835622353}
     - target: {fileID: 1423307487579017208, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
       propertyPath: m_LocalScale.x
       value: 6
@@ -1202,6 +1232,10 @@ PrefabInstance:
     - target: {fileID: 4933431849523189620, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
       propertyPath: m_Name
       value: PlayerMelee
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668981095237122941, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7123351837249142132, guid: 88534a4dd54042e419f4a4258c3d89b7, type: 3}
       propertyPath: hearts.Array.data[0]

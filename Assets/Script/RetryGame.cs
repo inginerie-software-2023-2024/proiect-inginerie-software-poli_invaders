@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.IO;
+using System;
 public class RetryGame : MonoBehaviour
 {
+    [SerializeField] Player jucator; //il am memorat pentru a mentine calea din fisier
     // Start is called before the first frame update
     void Start()
     {
+        string assetsPath = Application.dataPath;
+        Player.filePath = Path.Combine(Path.GetDirectoryName(assetsPath), "score.csv");
+        Debug.Log(Player.filePath);   
         
     }
 

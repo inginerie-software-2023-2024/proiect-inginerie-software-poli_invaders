@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRB: {fileID: 7064216805800314884, guid: 53c694d2f08a3c848bfa366fc5e967e5, type: 3}
-  interval: 0.3
+  interval: 0.6
   speedUpdateInterval: 5
   speedIncreaseAmount: 0.8
 --- !u!212 &440080374
@@ -1248,8 +1248,8 @@ Transform:
   m_GameObject: {fileID: 2013290249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0475, y: 0.0795, z: 0}
-  m_LocalScale: {x: 1.8305231, y: 1.8415856, z: 1}
+  m_LocalPosition: {x: 0.1454, y: 0.1091, z: 0}
+  m_LocalScale: {x: 1.8681513, y: 1.8576725, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

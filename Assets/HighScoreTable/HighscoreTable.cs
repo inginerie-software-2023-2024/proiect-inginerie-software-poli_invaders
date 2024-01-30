@@ -167,7 +167,7 @@ public class HighscoreTable : MonoBehaviour
     private void LoadScoresFromCSV(string fPath)
     {
         
-        Debug.Log("Intra in csv" + Player.filePath);
+        Debug.Log("Intra in csv cu chestia noua cu menu idkk" + Player.filePath);
 
         fPath = Player.filePath;
         Debug.Log("Path hai ma nu crapa: "+fPath);
