@@ -43,29 +43,22 @@ public class Player : MonoBehaviour
         if (enemy != null)
         {
             health -= 1;
-            if (health <= 0) {
-                
+            if (health <= 0)
+            {
+
                 //MOARE PLAYERU :((
                 //Destroy(gameObject);
                 //adaug aici scorul
-<<<<<<< Updated upstream
+
                 
                 Debug.Log("Ba hai ca scrie in csv" + Score.Instance.CurrentScore);
                 WriteScoreToCSV(Score.Instance.CurrentScore);
                 
                 
-                
-                if (projectileScript != null) {
-=======
-
-                Debug.Log("Ba hai ca scrie in csv" + Score.Instance.CurrentScore);
-                WriteScoreToCSV(Score.Instance.CurrentScore);
-
-
 
                 if (projectileScript != null)
                 {
->>>>>>> Stashed changes
+
                     projectileScript.enabled = false;
                 }
 
@@ -80,14 +73,9 @@ public class Player : MonoBehaviour
                 playerSr.sprite = hurtSprite;
                 hurtTimer = hurtDuration;
             }
-
-
         }
     }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
     // Added small easter egg for fun :)
     private void Update()

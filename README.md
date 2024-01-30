@@ -17,7 +17,9 @@ It was created using Unity Engine and C#.
 
 # Epic Story:
 
-In a hot summer day, while the students of FMI were looking over their textbooks and studying for the upcoming exams, a group of Politehnica students decided to invade the college. They were looking for a way to be true programmers and learn the ways of using other languages apart from ASM, C and C++. A brave student, who was working on his project for MDS decided to stop them so he can finish his project in peace. He asked for help from a CTI student because he needed high-tech gadgets to fight the invaders and went to the basement where he knew the battle will commence. 
+In a hot summer day, while the students of FMI were looking over their textbooks and studying for the upcoming exams, a group of Politehnica students decided to invade the college. They were looking for a way to be true programmers and learn the ways of using other languages apart from ASM, C and C++. A brave student, who was working on his project for MDS decided to stop them so he can finish his project in peace. He asked for help from a CTI student because he needed high-tech gadgets to fight the invaders and went to the basement where he knew the battle will commence.
+
+## [Link to server repo](https://github.com/stefanmoldoveanu23/poli-server)
 
 # Product vision
 

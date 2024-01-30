@@ -24,6 +24,12 @@ public class RetryGame : MonoBehaviour
         SceneManager.LoadScene("SelectLevel");
     }
 
+    public void LoadLobby()
+    {
+        //Cursor.visible = false;
+        SceneManager.LoadScene("Lobby");
+    }
+
     public void LoadMenu()
     {
         Cursor.visible = true;
