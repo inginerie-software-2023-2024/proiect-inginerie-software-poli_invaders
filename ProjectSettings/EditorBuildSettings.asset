@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HighScoreTable/Leaderboard.unity
     guid: fb048ef138c91594cb62f3a63016ef0c
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: a6d8e6f89f35b6b438ebb2e49c0561fb
+  - enabled: 1
+    path: Assets/Scenes/MultiInvaders.unity
+    guid: e9ba47fad3762fa40b68e58b88c3b853
+  - enabled: 1
+    path: Assets/Scenes/MultiGameOver.unity
+    guid: 654b5ad63311b9b4cb4bc7cffb3d735d
   m_configObjects: {}

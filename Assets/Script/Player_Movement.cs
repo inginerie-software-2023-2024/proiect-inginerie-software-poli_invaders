@@ -9,7 +9,7 @@ public class Player_Movement : MonoBehaviour
     public Vector3 topRightLimit;
     public Vector3 bottomLeftLimit;
 
-    void Start () {
+    protected void Start () {
         // Set the cursor to not be visible
         Cursor.visible = false;
         topRightLimit = topRightLimitGameobject.transform.position;
