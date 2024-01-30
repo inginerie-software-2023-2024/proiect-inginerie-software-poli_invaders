@@ -15,7 +15,7 @@ We were unable to work on other user stories in this sprint, but since it was th
 
 For the user stories that we have worked on, we have achieved the following:
 
-- we have added a new screen where the user can choose between melee and ranged gameplay.
+- we have resolved errors regarding the pick-up of powerups and the registration of collisions
 
 
 ## Sprint review
