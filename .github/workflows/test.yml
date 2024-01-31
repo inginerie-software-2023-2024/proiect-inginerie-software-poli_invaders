@@ -22,18 +22,3 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - test
-
-    steps:
-    - name: Upload Test results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: Test results
-        path: ./Sprints
-
-    - name: Upload Coverage results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: Coverage results
-        path: ${{ steps.custom_unity_version_test.outputs.coveragePath }}
