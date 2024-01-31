@@ -24,4 +24,4 @@ Steps to be performed to submit a pull request:
 
 #### License
 
-By contributing to this repository, you agree that your contributions will be licensed under the project's license.
+By contributing to this repository, you agree that your contributions will be licensed under MIT license.
