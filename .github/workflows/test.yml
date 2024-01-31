@@ -17,6 +17,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Run Unity tests and generate coverage
+      id: custom_unity_version_test
+      run: |
+        # Unity.exe -projectPath <path-to-project> -batchmode -testPlatform editmode -runTests -testResults <path-to-results-xml> -debugCodeOptimization -enableCodeCoverage -coverageResultsPath <path-to-coverage-results>-coverageOptions enableCyclomaticComplexity;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*,-UnityEditor*;pathFilters:-*Packages*
+        coveragePath="./coverage-results"
+        echo "::set-output name=coveragePath::$coveragePath"
+
   upload_results:
     name: Upload Test and Coverage Results
     runs-on: ubuntu-latest
