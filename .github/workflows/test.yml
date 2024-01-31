@@ -29,6 +29,7 @@ jobs:
       uses: game-ci/unity-test-runner@v4
       with:
         packageMode: true
+        unityVersion: 2023.3.18f1
 
   custom_unity_version_test:
     name: Run Unity Tests with Custom Unity Version
