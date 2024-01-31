@@ -29,7 +29,7 @@ jobs:
       if: always()
       with:
         name: Test results
-        path: ./artifacts
+        path: ./Sprints
 
     - name: Upload Coverage results
       uses: actions/upload-artifact@v3
