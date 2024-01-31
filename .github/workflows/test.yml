@@ -17,12 +17,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Unity
-      uses: game-ci/setup-unity@v1
-      with:
-        unityVersion: 2023.3.18f1
-        modules: 'all'
-
   package_mode_test:
     name: Run Unity Tests in Package Mode
     runs-on: ubuntu-latest
@@ -43,12 +37,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Unity
-      uses: game-ci/setup-unity@v1
-      with:
-        unityVersion: 2023.3.18f1
-        modules: 'all'
 
     - name: Run Unity Tests with Custom Unity Version
       uses: game-ci/unity-test-runner@v4
