@@ -16,7 +16,7 @@ We were unable to work on the other user stories in this sprint.
 For the user stories that we have worked on, we have achieved the following:
 
 - we have implemented the ability to join a multiplayer game;
-- we have implemented a scene with two players, with synchronized player movement;
+- we have implemented a game scene with two players, with synchronized player movement;
 
 The unresolved user stories have been pushed to the following sprints.
 
