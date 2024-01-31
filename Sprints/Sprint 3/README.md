@@ -16,7 +16,7 @@ We were unable to work on other user stories in this sprint.
 For the user stories that we have worked on, we have achieved the following:
 
 - we have created a new screen to showcase the different levels you can play;
-- we have implemented 2 new scenes that put the player in a different enviorment;
+- we have implemented 2 new game scenes that put the player in a different enviorment;
 
 The unresolved user stories will pe considered for future sprints.
 
