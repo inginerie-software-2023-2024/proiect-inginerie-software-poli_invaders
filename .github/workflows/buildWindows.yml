@@ -19,16 +19,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Unity
-      uses: game-ci/setup-unity@v4
-      with:
-        unityVersion: 2023.3.18f1
-        modules: 'all'
-
-    - name: Build Unity project for Windows
-      uses: game-ci/unity-builder@v4
-      with:
-        targetPlatform: StandaloneWindows64
+    - name: Unity - Builder
+      uses: game-ci/unity-builder@v4.1.4
+            
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
