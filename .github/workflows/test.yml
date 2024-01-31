@@ -1,0 +1,79 @@
+name: Unity Test and Coverage
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Unity Tests
+    runs-on: ubuntu-latest
+
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Unity
+      uses: game-ci/setup-unity@v1
+      with:
+        unityVersion: 2023.3.18f1
+        modules: 'all'
+
+  package_mode_test:
+    name: Run Unity Tests in Package Mode
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Unity Tests in Package Mode
+      uses: game-ci/unity-test-runner@v4
+      with:
+        packageMode: true
+
+  custom_unity_version_test:
+    name: Run Unity Tests with Custom Unity Version
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Unity
+      uses: game-ci/setup-unity@v1
+      with:
+        unityVersion: 2023.3.18f1
+        modules: 'all'
+
+    - name: Run Unity Tests with Custom Unity Version
+      uses: game-ci/unity-test-runner@v4
+      with:
+        unityVersion: 2023.3.18f1
+
+  upload_results:
+    name: Upload Test and Coverage Results
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - package_mode_test
+      - custom_unity_version_test
+
+    steps:
+    - name: Upload Test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: Test results
+        path: ./artifacts
+
+    - name: Upload Coverage results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: Coverage results
+        path: ${{ steps.custom_unity_version_test.outputs.coveragePath }}
