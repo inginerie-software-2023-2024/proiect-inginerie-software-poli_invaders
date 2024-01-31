@@ -25,7 +25,7 @@ The unresolved user stories have been pushed to the following sprints. Some prio
 
 Exam season is harder than anticipated. We were unable to come together and talk / work on the project topics. 
 <br>We have dediced to abandon some of the ideas that felt like perfectionism and focus on the core functionality of the game.
-<br>As a result we no longer have access to firebase. The implementation created many conflicts during the merging of the branches resulting in team members having to redo some of the work every single git pull because it would just get erased.
+<br>As a result we no longer have access to firebase. The implementation created many conflicts during the merging of the branches resulting in team members having to redo some of the work every single git pull because it would get erased.
 
 ## Sprint retrospective
 
