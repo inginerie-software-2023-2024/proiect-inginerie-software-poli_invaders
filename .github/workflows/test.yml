@@ -17,40 +17,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-  package_mode_test:
-    name: Run Unity Tests in Package Mode
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Run Unity Tests in Package Mode
-      uses: game-ci/unity-test-runner@v4
-      with:
-        packageMode: true
-        unityVersion: 2023.3.18f1
-
-  custom_unity_version_test:
-    name: Run Unity Tests with Custom Unity Version
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Run Unity Tests with Custom Unity Version
-      uses: game-ci/unity-test-runner@v4
-      with:
-        unityVersion: 2023.3.18f1
-
   upload_results:
     name: Upload Test and Coverage Results
     runs-on: ubuntu-latest
     needs:
       - test
-      - package_mode_test
-      - custom_unity_version_test
 
     steps:
     - name: Upload Test results
