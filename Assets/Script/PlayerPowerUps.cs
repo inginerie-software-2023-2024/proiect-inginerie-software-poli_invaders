@@ -3,23 +3,23 @@ using System.Collections;
 
 public class PlayerPowerUps : MonoBehaviour
 {
-    private bool doubleFire = false;
-    private bool shieldActive = false; // Indicates if the shield is active
+    public bool doubleFire = false;
+    public bool shieldActive = false; // Indicates if the shield is active
     public Projectile laserPrefab;
     public SpriteRenderer playerSprite;
     public Sprite shieldSprite;
     public Sprite defaultSprite;
     public float doubleFireDuration = 10f; // Duration of the double fire power-up
     public float shieldDuration = 5f; // Duration of the shield power-up
-    private Collider2D playerCollider; // Reference to the player's collider component
+    public Collider2D playerCollider; // Reference to the player's collider component
 
 
-    private void Awake()
+    public void Awake()
     {
         // Get the player's collider component
         playerCollider = GetComponent<Collider2D>();
     }
-    private void Update()
+    public void Update()
     {
         // Shoot when the left mouse button is pressed
         if (Input.GetMouseButtonDown(0) && doubleFire)
@@ -32,7 +32,7 @@ public class PlayerPowerUps : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("DoubleFirePU"))
         {
@@ -46,18 +46,20 @@ public class PlayerPowerUps : MonoBehaviour
         }
     }
 
-    private void ActivateDoubleFirePowerUp()
+    public void ActivateDoubleFirePowerUp()
     {
         doubleFire = true;
         StartCoroutine(ResetDoubleFirePowerUpCoroutine());
     }
 
-    private void ActivateShieldPowerUp()
+    public void ActivateShieldPowerUp()
     {
         if (!shieldActive)
         {
             shieldActive = true;
-            playerSprite.sprite = shieldSprite; // Change the player sprite to the shield sprite
+
+            if (playerSprite != null)
+                playerSprite.sprite = shieldSprite; // Change the player sprite to the shield sprite
 
             // Ignore collisions with enemies
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
@@ -66,7 +68,7 @@ public class PlayerPowerUps : MonoBehaviour
         }
     }
 
-    private IEnumerator ResetShieldPowerUpCoroutine()
+    public IEnumerator ResetShieldPowerUpCoroutine()
     {
         yield return new WaitForSeconds(shieldDuration);
 
@@ -77,20 +79,20 @@ public class PlayerPowerUps : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
     }
 
-    private IEnumerator ResetDoubleFirePowerUpCoroutine()
+    public IEnumerator ResetDoubleFirePowerUpCoroutine()
     {
         yield return new WaitForSeconds(doubleFireDuration);
         doubleFire = false;
     }
 
-    private void PerformShoot()
+    public void PerformShoot()
     {
         Vector3 laserOffset = new Vector3(0.99f, 0.36f, 0);
         Vector3 spawnPosition = transform.position + laserOffset;
         Instantiate(laserPrefab, spawnPosition, Quaternion.identity);
     }
 
-    private void PerformDoubleShoot()
+    public void PerformDoubleShoot()
     {
         Vector3[] laserOffsets = { new Vector3(0.99f, 0.43f, 0), new Vector3(0.99f, 0.27f, 0) };
 

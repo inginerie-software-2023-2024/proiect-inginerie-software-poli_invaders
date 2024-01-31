@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "PoliInvaders",
-        "RiptideNetworking"
+        "RiptideNetworking",
+        "Scripts"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

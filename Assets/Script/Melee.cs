@@ -94,7 +94,8 @@ public class Melee : MonoBehaviour
 
     private void ActivateDoubleFirePowerUp()
     {
-        range *=3f;
+        range *= 3f;
+        doubleFire = true;
         attackPointSprite.transform.localScale *= 3;
         StartCoroutine(ResetDoubleFirePowerUpCoroutine());
     }
