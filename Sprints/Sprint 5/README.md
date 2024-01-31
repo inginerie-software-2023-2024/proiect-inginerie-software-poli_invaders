@@ -1,4 +1,4 @@
-# Sprint Report 3 (Jan 29 - Jan 31)
+# Sprint Report 5 (Jan 29 - Jan 31)
 
 ## Team overview
 
@@ -17,6 +17,7 @@ For the user stories that we have worked on, we have achieved the following:
 
 - we have resolved errors regarding the pick-up of powerups and the registration of collisions
 
+We considered this to be the final addition to the game
 
 ## Sprint review
 
