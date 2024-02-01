@@ -1,8 +1,8 @@
 # Software Architecture Report
 
-**Date:** January 31, 2024
+**Date:** February 1, 2024
 
-**Version:** v1.0 (Commit ID: 33b84e8)
+**Version:** v1.1 (Commit ID: 298c483)
 
 ## **Contents:**
 
@@ -62,7 +62,7 @@ Detailed user journeys and data flows are provided in the user journey map and a
 
 ### **12. Most Valuable Output**
 
-The high score system and leaderboard functionality are highlighted as the most valuable outputs, providing users with a competitive and engaging experience.
+The high score system, the leaderboard functionality, the multiple levels structure and the real time multiplayer functionality are highlighted as the most valuable outputs, providing users with a competitive and engaging experience and offering a way to enjoy the game remotely, in a co-op version.
 
 ### **13. Deployment Plan**
 
@@ -70,15 +70,41 @@ The application is currently deployed locally for testing purposes. Future deplo
 
 ### **14. CI/CD Pipeline**
 
-The CI/CD pipeline is not yet fully implemented. Future iterations will integrate automated testing, continuous integration, and deployment processes.
+The CI/CD pipeline is implemented using GitHub Actions. There are workflows for the game itself and for the server where the multiplayer is hosted. Both repositories have Actions that build the project, however, the game repository has a semi-functional Action that verifies if the game’s tests are passing. The Actions were written using various repositories such as: 
+
+for the Server → GitHub’s official repo for Actions and Google’s Cloud official Actions
+
+for the Game → A free, open-source library specifically meant for Unity CI: Game-CI and GitHub’s official repo for Actions
 
 ### **15. QA Process**
 
-The QA process involves manual testing of core functionalities. A comprehensive automated test suite is planned for future development.
+The QA process heavily relied onto manual testing. A comprehensive automated test suite is planned for future development. Types of manual testing:
+
+White Box Techniques: 
+
+**Branch Software Testing →** It ensures that no branch leads to abnormal behavior of the application
+
+Black Box Techniques:
+
+**Unit Testing →** It isolates sections of code and tests every function for its correctness 
+
+Usability Testing:
+
+Evaluate a product by testing it with the proper users
+
+Regression Testing: 
+
+It ensures that newly added features won’t affect the already implemented ones
+
+Visual Testing:
+
+It validates whether the developed software user interface (UI) is compatible with the user’s view
+
+A report containing the user testing feedback can be found at UserReport.md
 
 ### **16. Test Suites**
 
-Current test suites cover basic gameplay functionality, multiplayer interactions, and UI elements. Future iterations will expand test coverage.
+Current test suites cover basic gameplay functionality, multiplayer interactions, and UI elements. Future iterations will expand test coverage for Play Mode and for Edit Mode as well. 
 
 ### **17. External Dependencies**
 
