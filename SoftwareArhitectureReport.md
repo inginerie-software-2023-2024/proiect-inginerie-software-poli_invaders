@@ -2,7 +2,7 @@
 
 **Date:** February 1, 2024
 
-**Version:** v1.1 (Commit ID: 298c483)
+**Version:** v1.1 (Commit ID: 164914e)
 
 ## **Contents:**
 
@@ -72,7 +72,7 @@ The application is currently deployed locally for testing purposes. Future deplo
 
 The CI/CD pipeline is implemented using GitHub Actions. There are workflows for the game itself and for the server where the multiplayer is hosted. Both repositories have Actions that build the project, however, the game repository has a semi-functional Action that verifies if the game’s tests are passing. The Actions were written using various repositories such as: 
 
-for the Server → GitHub’s official repo for Actions and Google’s Cloud official Actions
+for the Server → GitHub’s official repo for Actions and Google’s Cloud official Actions, to automatically run the built project on a gcloud virtual machine
 
 for the Game → A free, open-source library specifically meant for Unity CI: Game-CI and GitHub’s official repo for Actions
 
